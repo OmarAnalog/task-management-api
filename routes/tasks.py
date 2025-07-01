@@ -38,8 +38,8 @@ def update_task(task_id:int ,taskUpdated:TaskUpdate ,session:Session=Depends(get
     session.refresh(db_task)
     return db_task
 
-@router.put("/{task_id}",status_code=204)
-def update_task(task_id:int ,taskUpdated:TaskUpdate ,session:Session=Depends(getsession)):
+@router.delete("/{task_id}",status_code=204)
+def delete_task(task_id:int ,taskUpdated:TaskUpdate ,session:Session=Depends(getsession)):
     db_task=session.get(Task,task_id)
     if not db_task:
         raise HTTPException(404,"There's no task with this id")
