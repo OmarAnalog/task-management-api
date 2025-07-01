@@ -70,7 +70,7 @@ def get_tasks_by_status(status:TaskStatus,session:Session=Depends(getsession)):
         raise HTTPException(status_code=404, detail=f"No tasks found with status: {status}")
     return tasks
 @router.get("/priority/{priority}",response_model=list[TaskResponse])
-def get_tasks_by_status(priority:TaskPriority,session:Session=Depends(getsession)):
+def get_tasks_by_priority(priority:TaskPriority,session:Session=Depends(getsession)):
     query=select(Task).where(priority==Task.priority)
     result = session.execute(query)
     tasks = result.scalars().all()
